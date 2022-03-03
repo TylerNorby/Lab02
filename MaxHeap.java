@@ -1,91 +1,87 @@
-public class MaxHeap {
-    private Process[] Heap;
-    int size;
-    int maxSize;
+public class MaxHeap<T extends Comparable<T>> {
 
-    public MaxHeap(int maxSize) {
-        this.maxSize = maxSize;
-        this.size = 0;
-        Heap = new Process[this.maxSize];
+    Comparable<T>[] heap;
+    int heapSize;
+    int capacity;
+    
+    public MaxHeap(int capacity){
+        this.capacity = capacity;
+        heap = new Comparable[capacity];
+        heapSize = 0;
     }
 
-    // Returns pos of parent node
-    private int parent(int pos) {
-        return (pos - 1) / 2;
+    public T extractHeapMax(){
+        T popped = (T)heap[1];
+        heap[1] = heap[heapSize--];
+        maxHeapify(1);
+        return popped;
     }
 
-    // Returns pos of left child node
-    private int leftChild(int pos) {
-        return ((2 * pos) + 1);
-    }
+    public void maxHeapInsert(T o, int pos){
+        heap[heapSize] = (T)o;
+        T temp;
 
-    // Returns pos of right child node
-    private int rightChild(int pos) {
-        return ((2 * pos) + 2);
-    }
-
-    // Method returns if node is leaf
-    private boolean isLeaf(int pos) {
-        if (pos > (size / 2) && pos <= size) {
-            return true;
+        // Traverse up and fix violated property
+        int current = heapSize;
+        int parent = ((current - 1)/2);
+        while (heap[current].compareTo((T)heap[parent]) < 0) {
+            temp = (T) heap[current];
+            heap[current] = heap[parent];
+            heap[parent] = temp;
         }
-        return false;
+        heapSize++;
+        maxHeapify(pos);
     }
 
-    // Swapping nodes
-    private void swap(int fpos, int spos) {
-        Process temp;
-        temp = Heap[fpos];
-        Heap[fpos] = Heap[spos];
-        Heap[spos] = temp;
-    }
+    public void maxHeapify(int pos){
+        int left = 2*pos;
+        int right = 2*pos+1;
+        int largest;
+        T temp;
 
-    // Inserts a new element to max heap
-    public void insert(Process element) {
-        Heap[size] = element;
-
-        // Traverse up and sets new element to correct positon
-        int current = size;
-        while (Heap[current].compareTo(Heap[parent(current)]) > 0) {
-            swap(current, parent(current));
-            current = parent(current);
+        if(left <= heapSize && heap[left].compareTo((T)heap[pos]) < 0){
+            largest = left;
+        }else{
+            largest = pos;
         }
-        size++;
+        if (right <= heapSize && heap[right].compareTo((T)heap[pos]) < 0){
+            largest = right;
+        }
+        if (largest != pos){
+            temp = (T)heap[pos];
+            heap[pos] = heap[largest];
+            heap[largest] = temp;
+            maxHeapify(largest);
+        }
     }
 
-    private void maxHeapify(int pos) {
-
-        // TODO: remember what this does lol
-        // Its a check of some sort
-        if (isLeaf(pos)) {
-            return;
-        }
-
-        // Assigning variables
-        Process leftChild = Heap[leftChild(pos)];
-        Process rightChild = Heap[rightChild(pos)];
-
-
-        if (Heap[pos].compareTo(leftChild) < 0 || Heap[pos].compareTo(rightChild) < 0) {
-
-            if (leftChild.compareTo(rightChild) > 0) {
-                swap(pos, leftChild(pos));
-                maxHeapify(leftChild(pos));
-            } else {
-                swap(pos, rightChild(pos));
-                maxHeapify(rightChild(pos));
-            }
-        }
+    //TODO: Figure this out lol
+    public void increaseKey(int x, int y){
 
     }
 
-    // Removes the root
-    public Process extractMax() {
-        Process root = Heap[0];
-        Heap[0] = Heap[size - 1];
-        maxHeapify(0);
-        size--;
-        return root;
+    public Boolean isEmpty(){
+        return (heapSize == 0);
+    }
+
+    public int getSize(){
+        return heapSize;
+    }
+
+
+    //TODO: This
+    public void setSize(int x){
+
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+
+    //TODO: This
+    public void setCapacity(){
+
     }
 }
 
