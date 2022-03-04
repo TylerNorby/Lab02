@@ -11,9 +11,9 @@ public class MaxHeap<T extends Comparable<T>> {
     }
     //TODO: This might be 0
     public T extractHeapMax(){
-        T popped = heap[1];
-        heap[1] = heap[heapSize--];
-        maxHeapify(1);
+        T popped = heap[0];
+        heap[0] = heap[heapSize--];
+        maxHeapify(0);
         return popped;
     }
     //TODO: This might be 0
@@ -30,7 +30,7 @@ public class MaxHeap<T extends Comparable<T>> {
             heap[parent] = temp;
         }
         heapSize++;
-        maxHeapify(1);
+        maxHeapify(0);
     }
 
     public void maxHeapify(int pos){

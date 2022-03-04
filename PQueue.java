@@ -37,7 +37,7 @@ public class PQueue {
                 currentProcess.resetTimeNotProcessed();
                 if (currentProcess.getPriority() < maxPriority) {
                     currentProcess.setPriority(currentProcess.getPriority() + 1);
-                    pqueue.maxHeapify(1); //TODO: this might be 0
+                    pqueue.maxHeapify(0); //TODO: this might be 0
                 }
             }
 
