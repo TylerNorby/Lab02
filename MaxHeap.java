@@ -1,36 +1,36 @@
 public class MaxHeap<T extends Comparable<T>> {
 
-    Comparable<T>[] heap;
-    int heapSize;
-    int capacity;
+    private T[] heap;
+    private int heapSize;
+    private int capacity;
     
     public MaxHeap(int capacity){
         this.capacity = capacity;
-        heap = new Comparable[capacity];
+        heap = (T[])new Comparable[capacity];
         heapSize = 0;
     }
-
+    //TODO: This might be 0
     public T extractHeapMax(){
-        T popped = (T)heap[1];
+        T popped = heap[1];
         heap[1] = heap[heapSize--];
         maxHeapify(1);
         return popped;
     }
-
-    public void maxHeapInsert(T o, int pos){
-        heap[heapSize] = (T)o;
+    //TODO: This might be 0
+    public void maxHeapInsert(T o){
+        heap[heapSize] = o;
         T temp;
 
         // Traverse up and fix violated property
         int current = heapSize;
         int parent = ((current - 1)/2);
-        while (heap[current].compareTo((T)heap[parent]) < 0) {
-            temp = (T) heap[current];
+        while (heap[current].compareTo(heap[parent]) < 0) {
+            temp = heap[current];
             heap[current] = heap[parent];
             heap[parent] = temp;
         }
         heapSize++;
-        maxHeapify(pos);
+        maxHeapify(1);
     }
 
     public void maxHeapify(int pos){
@@ -39,24 +39,25 @@ public class MaxHeap<T extends Comparable<T>> {
         int largest;
         T temp;
 
-        if(left <= heapSize && heap[left].compareTo((T)heap[pos]) < 0){
+        if(left <= heapSize && heap[left].compareTo(heap[pos]) < 0){
             largest = left;
         }else{
             largest = pos;
         }
-        if (right <= heapSize && heap[right].compareTo((T)heap[pos]) < 0){
+        if (right <= heapSize && heap[right].compareTo(heap[pos]) < 0){
             largest = right;
         }
         if (largest != pos){
-            temp = (T)heap[pos];
-            heap[pos] = heap[largest];
-            heap[largest] = temp;
+            increaseKey(pos,largest);
             maxHeapify(largest);
         }
     }
 
-    //TODO: Figure this out lol
-    public void increaseKey(int x, int y){
+    //Use it as a swap function
+    public void increaseKey(int pos1, int pos2){
+        T temp = heap[pos1];
+        heap[pos1] = heap[pos2];
+        heap[pos2] = temp;
 
     }
 
@@ -68,20 +69,20 @@ public class MaxHeap<T extends Comparable<T>> {
         return heapSize;
     }
 
-
-    //TODO: This
-    public void setSize(int x){
-
+    public void setSize(int heapSize){
+        this.heapSize  = heapSize;
     }
 
     public int getCapacity() {
         return capacity;
     }
 
+    public void setCapacity(int capacity){
+        this.capacity = capacity;
+    }
 
-    //TODO: This
-    public void setCapacity(){
-
+    public T[] getHeap(){
+        return heap;
     }
 }
 
