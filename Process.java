@@ -53,7 +53,15 @@ public class Process implements Comparable<Process> {
     // Methods
     public void reduceTimeRemaining(){
         timeRemaining--;
+        resetTimeNotProcessed();
+    }
+
+    public void resetTimeNotProcessed(){
         timeNotProcessed = 0;
+    }
+
+    public boolean finish(){
+        return (timeRemaining == 0);
     }
 
     public void incrementTimeNotProcessed(){

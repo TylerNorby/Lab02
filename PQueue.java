@@ -1,8 +1,8 @@
-public class Pqueue {
+public class PQueue {
     MaxHeap<Process> pqueue;
 
 
-    public Pqueue() {
+    public PQueue() {
         this.pqueue = new MaxHeap<Process>(100);
     }
 
@@ -34,7 +34,7 @@ public class Pqueue {
             }
             currentProcess.incrementTimeNotProcessed();
             if (currentProcess.getTimeNotProcessed() >= timeToIncrement) {
-                currentProcess.setTimeNotProcessed(0);
+                currentProcess.resetTimeNotProcessed();
                 if (currentProcess.getPriority() < maxPriority) {
                     currentProcess.setPriority(currentProcess.getPriority() + 1);
                     pqueue.maxHeapify(1); //TODO: this might be 0
