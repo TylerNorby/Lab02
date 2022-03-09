@@ -30,7 +30,7 @@ public class MaxHeap<T extends Comparable<T>> {
 
     }
 
-    //TODO: This might be 0
+
     public T extractHeapMax() {
         //javac *.java
         //./run_test 0.5
