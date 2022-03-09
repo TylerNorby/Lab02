@@ -39,11 +39,16 @@ public class MaxHeap<T extends Comparable<T>> {
         if (heapSize < 1 ){
             return null;
         }
-        T popped = heap[0];
-        for(int i = 0; i < heapSize; i++){
-            heap[i] = heap[i+1];
-        }
+     //   T popped = heap[0];
+       // for(int i = 0; i < heapSize; i++){
+         //   heap[i] = heap[i+1];
+       // }
+        //heapSize--;
+
         heapSize--;
+        T popped = heap[0];
+        heap[0] = heap[heapSize];
+
         maxHeapify(0);
         return popped;
     }
