@@ -52,7 +52,7 @@ public class Process implements Comparable<Process> {
 
     // Methods
     public void reduceTimeRemaining(){
-        timeRemaining--;
+        this.timeRemaining--;
         resetTimeNotProcessed();
     }
 

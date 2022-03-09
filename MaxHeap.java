@@ -36,6 +36,9 @@ public class MaxHeap<T extends Comparable<T>> {
     public T extractHeapMax() {
         //javac *.java
         //./run_test 0.5
+        if (heapSize < 1 ){
+            return null;
+        }
         T popped = heap[0];
         for(int i = 0; i < heapSize; i++){
             heap[i] = heap[i+1];
@@ -112,25 +115,4 @@ public class MaxHeap<T extends Comparable<T>> {
         return heap[i];
     }
 
-
-    //TODO: Remove this
-    public void print() {
-
-
-        for (int i = 0; i < heapSize / 2; i++) {
-            int leftChild = left(i);
-            int rightChild = right(i);
-            System.out.print("Parent Node : " + heap[i]);
-
-            if (leftChild < i) //if the child is out of the bound of the array
-                System.out.print(" Left Child Node: " + heap[leftChild]);
-
-            if (rightChild < heapSize) //if the right child index must not be out of the index of the array
-                System.out.print(" Right Child Node: " + heap[rightChild]);
-
-            System.out.println(); //for new line
-
-        }
-
-    }
 }
