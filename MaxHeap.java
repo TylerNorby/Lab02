@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class MaxHeap<T extends Comparable<T>> {
 
     private T[] heap;
@@ -45,6 +47,11 @@ public class MaxHeap<T extends Comparable<T>> {
 
     //TODO: double heap size
     public void maxHeapInsert(T o) {
+
+        if (heapSize==capacity){
+            capacity *= 2;
+            heap = Arrays.copyOf(heap, capacity);
+        }
 
         heap[heapSize] = o;
         maxHeapify(0);
