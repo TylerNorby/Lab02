@@ -28,7 +28,7 @@ public class PQueue {
 
     public void update(int timeToIncrement, int maxPriority) {
         for (int i = 0; i < pqueue.getSize(); i++) {
-            Process currentProcess = pqueue.getHeap()[i];
+            Process currentProcess = pqueue.getElement(i);
             if (currentProcess == null) {
                 return;
             }

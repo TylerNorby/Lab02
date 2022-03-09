@@ -34,9 +34,12 @@ public class MaxHeap<T extends Comparable<T>> {
     public T extractHeapMax() {
         //javac *.java
         //./run_test 0.5
-        T popped = heap[1];
-        heap[1] = heap[heapSize--];
-        maxHeapify(1);
+        T popped = heap[0];
+        for(int i = 0; i < heapSize; i++){
+            heap[i] = heap[i+1];
+        }
+        heapSize--;
+        maxHeapify(0);
         return popped;
     }
 
@@ -96,6 +99,10 @@ public class MaxHeap<T extends Comparable<T>> {
 
     public T[] getHeap() {
         return heap;
+    }
+
+    public T getElement(int i){
+        return heap[i];
     }
 
 
