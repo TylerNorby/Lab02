@@ -1,3 +1,8 @@
+/*
+   Author: Tyler Norby
+   Project: Lab02
+   Description: implementation of Process object
+    */
 public class Process implements Comparable<Process> {
 
     // Declaring Variables
@@ -6,13 +11,14 @@ public class Process implements Comparable<Process> {
     int arrivalTime;
     int timeNotProcessed;
 
-    public Process(int priority, int arrivalTime, int timeRemaining){
+
+    //Default constructor
+    public Process(int priority, int arrivalTime, int timeRemaining) {
         this.priority = priority;
         this.arrivalTime = arrivalTime;
         this.timeRemaining = timeRemaining;
         setTimeNotProcessed(0);
     }
-
 
 
     // Getters and Setters
@@ -49,37 +55,39 @@ public class Process implements Comparable<Process> {
     }
 
 
-
-    // Methods
-    public void reduceTimeRemaining(){
+    // Reduces timeRemaining
+    public void reduceTimeRemaining() {
         this.timeRemaining--;
         resetTimeNotProcessed();
     }
 
-    public void resetTimeNotProcessed(){
+    public void resetTimeNotProcessed() {
         timeNotProcessed = 0;
     }
 
-    public boolean finish(){
+    // Returns true if process is finished
+    public boolean finish() {
         return (timeRemaining == 0);
     }
 
-    public void incrementTimeNotProcessed(){
+    // Increments timeNotProcessed
+    public void incrementTimeNotProcessed() {
         timeNotProcessed++;
     }
 
     @Override
+    // Implementation of compareTo method, compares processes
     public int compareTo(Process o) {
-        if(priority > o.priority){  // if o's priority time is less, return 1
+        if (priority > o.priority) {  // if o's priority time is less, return 1
             return 1;
-        }else if(priority < o.priority){ // if o's priority time is greater, return -1
+        } else if (priority < o.priority) { // if o's priority time is greater, return -1
             return -1;
-        }else{
-            if(arrivalTime > o.arrivalTime){ // if o's arrival time is less, return 1
+        } else {
+            if (arrivalTime > o.arrivalTime) { // if o's arrival time is less, return 1
                 return 1;
-            }else if(arrivalTime < o.arrivalTime){ // if o's arrival time is greater, return -1
+            } else if (arrivalTime < o.arrivalTime) { // if o's arrival time is greater, return -1
                 return -1;
-            }else{ // If all values are equal, returns 0
+            } else { // If all values are equal, returns 0
                 return 0;
             }
         }
